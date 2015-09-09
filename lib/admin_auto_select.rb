@@ -1,5 +1,9 @@
 require "admin_auto_select/version"
 
 module AdminAutoSelect
-  # Your code goes here...
+  module ActiveAdmin
+    def admin_auto_select(field)
+      puts "I am auto selecting this #{field}"
+    end
+  end
 end
