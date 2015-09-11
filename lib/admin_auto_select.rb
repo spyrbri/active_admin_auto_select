@@ -34,7 +34,8 @@ module AutoSelectable
             select(select_fields << ", #{similarity_sql} as similarity").
             where("#{concat_cols} ILIKE :term", term: "%#{first_term}%").
             order("#{similarity_sql} DESC").
-            limit(15).offset(offset)
+            limit(15).offset(offset).
+            map { |r| r.attributes.reject { |a| a == 'similarity'} }
         end
 
         render json: resource_records
