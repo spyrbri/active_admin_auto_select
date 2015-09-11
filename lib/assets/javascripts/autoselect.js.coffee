@@ -1,4 +1,4 @@
-class ex.AutoSelect
+class AutoSelect
   constructor: (@options = {}) ->
     @$input = $(@options['input'])
     @width = @options['width'] || 240
@@ -25,10 +25,10 @@ class ex.AutoSelect
           {results: data, more: more}
       formatResult: (item, container, query, escapeFn) =>
         markup = []
-        window.Select2.util.markMatch(_.toArray(item).join(' - '), query.term, markup, escapeFn)
+        window.Select2.util.markMatch(@detailText(item), query.term, markup, escapeFn)
         text = markup.join('')
       formatSelection: (item, container, escapeFn) =>
-        _.toArray(item).join(' - ')
+        @detailText(item)
       initSelection: (e, callback) =>
         id = $(e).val()
         if id isnt ""
@@ -38,3 +38,8 @@ class ex.AutoSelect
 
     @$input.change 'select2-selecting', () ->
       $(@).closest('.filter_form').submit()
+
+  detailText: (item) ->
+    _.reject(_.uniq(_.toArray(item)), (el) ->
+      el == ''
+    ).join(' - ')

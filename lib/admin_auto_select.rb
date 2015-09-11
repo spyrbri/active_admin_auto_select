@@ -30,7 +30,8 @@ module AutoSelectable
           similarity_sql = ActiveRecord::Base.send(:sanitize_sql_array,
               ["(similarity(#{resource.table_name}.id::text, :id) + similarity(#{concat_cols}, :id))", id: term])
 
-          resource_records = effective_scope.call.select(select_fields).
+          resource_records = effective_scope.call.
+            select(select_fields << ", #{similarity_sql} as similarity").
             where("#{concat_cols} ILIKE :term", term: "%#{first_term}%").
             order("#{similarity_sql} DESC").
             limit(15).offset(offset)
