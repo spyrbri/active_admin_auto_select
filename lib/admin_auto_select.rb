@@ -16,7 +16,7 @@ module AutoSelectable
         first_term = term.try(:match, /\w \w/) ? (term.split(' '))[0] : term
         page = params[:page].try(:to_i)
         offset = page ? (page - 1) * 10 + (5 * (page - 1)) : 0
-        effective_scope = options[params[:scope]] || options['default_scope'] || resource
+        effective_scope = options[params[:scope]] || options['default_scope'] ||->{ resource }
 
         if params[:id]
            first_resource = effective_scope.call.
