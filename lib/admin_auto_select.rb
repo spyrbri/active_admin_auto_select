@@ -19,7 +19,7 @@ module AutoSelectable
         effective_scope = options[params[:scope]] || options['default_scope'] || resource
 
         if params[:id]
-           first_resource = effective_scope.
+           first_resource = effective_scope.call.
              where("#{resource.table_name}.id = ?", params[:id].to_i).
              select(select_fields).first
            render json: first_resource and return
@@ -30,7 +30,7 @@ module AutoSelectable
           similarity_sql = ActiveRecord::Base.send(:sanitize_sql_array,
               ["(similarity(#{resource.table_name}.id::text, :id) + similarity(#{concat_cols}, :id))", id: term])
 
-          resource_records = effective_scope.select(select_fields).
+          resource_records = effective_scope.call.select(select_fields).
             where("#{concat_cols} ILIKE :term", term: "%#{first_term}%").
             order("#{similarity_sql} DESC").
             limit(15).offset(offset)
