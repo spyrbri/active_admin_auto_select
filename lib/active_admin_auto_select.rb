@@ -1,4 +1,5 @@
 require "active_admin_auto_select/version"
+require 'active_admin_auto_select/rails'
 
 module AutoSelectable
   def auto_select(*fields)
