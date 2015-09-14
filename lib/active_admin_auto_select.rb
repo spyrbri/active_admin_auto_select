@@ -17,8 +17,12 @@ module AutoSelectable
         first_term = term.try(:match, /\w \w/) ? (term.split(' '))[0] : term
         page = params[:page].try(:to_i)
         offset = page ? (page - 1) * 10 + (5 * (page - 1)) : 0
-        effective_scope = options[params[:scope]] || options['default_scope'] ||->{ resource }
 
+        #params[:scope] is passed through js when we define the relevate data attribute on the filter
+        #default_scope is passed as a proc argument in #auto_select and overrides the default resource scope
+        effective_scope = options[params[:scope]] || options['default_scope'] || ->{ resource }
+
+        #This param exists when we have a filtered result
         if params[:id]
            first_resource = effective_scope.call.
              where("#{resource.table_name}.id = ?", params[:id].to_i).
