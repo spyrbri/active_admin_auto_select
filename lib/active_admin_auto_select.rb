@@ -10,7 +10,7 @@ module AutoSelectable
   def create_collection_action(fields, options, resource)
     collection_action :autoselect, :method => :get do
       select_fields = "#{resource.table_name}.id, " << fields.join(', ')
-      if authorized?(:read, resource)
+      if (Module.const_get(:CanCanCan) rescue false) ? authorized?(:read, resource) :true
         term = ([ params[:id], params[:q]].compact).try(:first)
         term.gsub!('%', '\\\%')
         term.gsub!('_', '\\\_')
