@@ -2,9 +2,9 @@
 
 This gem is a little widget which combines Select2, PostgeSQL and ActiveAdmin and helps you filter objects in ActiveAdmin based on the id but with the help of some other fields.
 
-[Imgur](http://i.imgur.com/6s0Xnco.png)
+![Image of AutoSelect](http://i.imgur.com/lEJmaQC.png)
+![Image of AutoSelect](http://i.imgur.com/6s0Xnco.png)
 
-[Imgur](http://i.imgur.com/lEJmaQC.png)
 ## Installation
 
 Add this line to your application's Gemfile:
