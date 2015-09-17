@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["spyrbri"]
   spec.email         = ["spyrbri@gmail.com"]
   spec.summary       = %q{This gem helps you select a row of a column in a model with autocomplete in active admin}
-  spec.description   = %q{This is an integration of select2 and active-admin}
+  spec.description   = %q{This gem helps you build nice filters in Activeadmin. It combines Select2, PostgresSQL and Ajax to create an easy to use select field.}
   spec.homepage      = "https://github.com/spyrbri/active_admin_auto_select"
   spec.license       = "MIT"
   spec.files         = `git ls-files`.split("\n")
