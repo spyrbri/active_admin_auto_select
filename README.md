@@ -1,6 +1,6 @@
 # ActiveAdminAutoSelect
 
-This gem is a little widget which combines Select2, PostgeSQL and ActiveAdmin and helps you filter objects in ActiveAdmin based on the id but with the help of some other fields.
+This gem is a little widget which combines Select2, PostgeSQL and ActiveAdmin and helps you filter objects in ActiveAdmin with autocomplete of the selected fields.
 
 ![Image of AutoSelect](http://i.imgur.com/lEJmaQC.png)
 ![Image of AutoSelect](http://i.imgur.com/6s0Xnco.png)
