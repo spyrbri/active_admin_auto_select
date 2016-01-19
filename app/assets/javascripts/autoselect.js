@@ -6,6 +6,7 @@ AutoSelect = (function() {
     this.$input = $(this.options['input']);
     this.width = this.options['width'] || 240;
     this.placeholder = this.options['placeholder'];
+    this.multiple = this.options['multiple'];
   }
 
   AutoSelect.prototype.init = function() {
@@ -17,6 +18,7 @@ AutoSelect = (function() {
       allowClear: true,
       minimumInputLength: 1,
       width: this.width,
+      multiple: this.multiple,
       ajax: {
         url: url,
         quietMillis: 300,
