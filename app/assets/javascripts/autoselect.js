@@ -54,11 +54,12 @@ AutoSelect = (function() {
       })(this),
       initSelection: (function(_this) {
         return function(e, callback) {
-          var id;
-          id = $(e).val();
-          if (id !== "") {
+          var value, ids;
+          value = $(e).val();
+          ids = value.split(' ');
+          if (value !== "") {
             return $.getJSON(url, {
-              id: id
+              ids: ids
             }).done(function(data) {
               callback(data);
               return _this.$input.trigger("autocomplete:ajax:success", data);

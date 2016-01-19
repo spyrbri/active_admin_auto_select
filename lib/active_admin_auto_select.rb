@@ -11,7 +11,7 @@ module AutoSelectable
     collection_action :autoselect, :method => :get do
       select_fields = "#{resource.table_name}.id, " << fields.join(', ')
       if (Module.const_get(:CanCanCan) rescue false) ? authorized?(:read, resource) :true
-        term = ([ params[:id], params[:q]].compact).try(:first)
+        term = params[:q].to_s
         term.gsub!('%', '\\\%')
         term.gsub!('_', '\\\_')
         first_term = term.try(:match, /\w \w/) ? (term.split(' '))[0] : term
@@ -23,11 +23,12 @@ module AutoSelectable
         effective_scope = options[params[:scope]] || options['default_scope'] || ->{ resource }
 
         #This param exists when we have a filtered result
-        if params[:id]
-           first_resource = effective_scope.call.
-             where("#{resource.table_name}.id = ?", params[:id].to_i).
-             select(select_fields).first
-           render json: first_resource and return
+        if params[:ids].present?
+           resources = effective_scope.call.
+             where("#{resource.table_name}.id IN (?)", params[:ids]).
+             select(select_fields)
+           resources = resources.first if resources.size == 1
+           render json: resources and return
         else
           concat_fields = fields.join(" || ' '::text || ")
           concat_cols = "((#{concat_fields})" <<  " || ' '::text || #{resource.table_name}.id::text)"
