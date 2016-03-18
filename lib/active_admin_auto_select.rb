@@ -27,7 +27,11 @@ module AutoSelectable
            resources = effective_scope.call.
              where("#{resource.table_name}.id IN (?)", params[:ids]).
              select(select_fields)
-           resources = resources.first if resources.size == 1
+           if resources.size == 1
+             resources = resources.first
+           else
+             resources = resources.sort_by { |r| params[:ids].index(r.id.to_s) }
+           end
            render json: resources and return
         else
           concat_fields = fields.join(" || ' '::text || ")
