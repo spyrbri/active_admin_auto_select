@@ -1,4 +1,6 @@
 # ActiveAdminAutoSelect
+[![Build Status](http://www.testributor.com/projects/55-active-admin-auto-select/status?branch=master)][testributor]
+[testributor]: http://www.testributor.com/projects/55-active-admin-auto-select
 
 This gem is a little widget which combines Select2, PostgeSQL and ActiveAdmin and helps you filter objects in ActiveAdmin with autocomplete of the selected fields.
 
