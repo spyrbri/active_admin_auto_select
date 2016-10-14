@@ -12,7 +12,7 @@ This gem is a little widget which combines Select2, PostgeSQL and ActiveAdmin an
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'admin_auto_select'
+gem 'active_admin_auto_select'
 ```
 
 And then execute:
