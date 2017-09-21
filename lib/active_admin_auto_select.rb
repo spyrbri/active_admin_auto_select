@@ -4,7 +4,12 @@ require 'active_admin_auto_select/rails'
 module AutoSelectable
   def auto_select(*fields)
     options = fields.extract_options!
-    create_collection_action(fields, options, @resource)
+
+    # The @resource instance variable seems unavailable in versions 
+    # later than 1.0.0.pre1 of the ActiveAdmin.
+    resource = @resource || self.config.resource_class_name.constantize
+    
+    create_collection_action(fields, options, resource)
   end
 
   def create_collection_action(fields, options, resource)
