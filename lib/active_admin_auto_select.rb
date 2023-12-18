@@ -48,7 +48,7 @@ module AutoSelectable
           resource_records = effective_scope.call.
             select(select_fields << ", #{similarity_sql} as similarity").
             where("#{concat_cols} ILIKE :term", term: "%#{first_term}%").
-            order("#{similarity_sql} DESC").
+            order("similarity DESC").
             limit(15).offset(offset)
         end
 
